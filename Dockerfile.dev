@@ -1,0 +1,9 @@
+# Extend from the base image built by the main Dockerfile
+ARG BASE_IMAGE
+FROM ${BASE_IMAGE}
+
+# Install development tools and dependencies
+RUN apt-get install -y \
+    curl 
+
+WORKDIR /app

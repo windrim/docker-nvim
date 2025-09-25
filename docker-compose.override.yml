@@ -1,0 +1,9 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: .dev/Dockerfile.dev
+      args:
+        BASE_IMAGE: app:base
+    volumes:
+      - .:/app
