@@ -2,8 +2,24 @@
 ARG BASE_IMAGE
 FROM ${BASE_IMAGE}
 
+WORKDIR /
+
 # Install development tools and dependencies
 RUN apt-get install -y \
-    curl 
+    # build dependencies
+    ninja-build \
+    gettext \
+    cmake \
+    curl \
+    build-essential 
+
+
+# cloning repo, then getting stable version
+RUN git clone https://github.com/neovim/neovim
+WORKDIR /neovim
+RUN git checkout stable
+
+RUN make CMAKE_BUILD_TYPE=RelWithDebInfo
+RUN make install
 
 WORKDIR /app
